@@ -6,7 +6,7 @@ const int screenwidth=800;
 const int screenheight=600;
 
 // draw point function
-void dpoint(point a,Color c){
+void dpoint(Point a,Color c){
   DrawPixel(a.x,a.y,c);
 }   
 
@@ -25,9 +25,9 @@ int main(){
 
     ClearBackground(BLACK);
 
-    point a =p(200,300);
-    point b =p(100,150);
-    point c =p(600,400);
+    Point a =p(200,300);
+    Point b =p(100,150);
+    Point c =p(600,400);
 
     dpoint(a,RAYWHITE);
     dpoint(b,RAYWHITE);
@@ -35,7 +35,7 @@ int main(){
 
 
 
-    vector offset = v2(0,20);
+    vector offset = v2(20,0);
 
     dpoint(vaddp(offset,a),RED);
     dpoint(vaddp(offset,b),RED);

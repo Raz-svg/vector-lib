@@ -23,7 +23,7 @@ point padd(point a,point b){
 //. Vector
 typedef struct{
   float x,y; 
-} Vector;
+} vector;
 
 // vector constructor
 vector v2(float x,float y){
@@ -49,7 +49,7 @@ vector sub(point a,point b){
 
 
 // Vector+Point =Point translated int the direction of the vector 
-Point v2p(vector v,point p){
+point vaddp(vector v,point p){
   point result ={v.x+p.x,v.y+p.y};
   return result;
 }
