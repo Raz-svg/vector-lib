@@ -1,7 +1,14 @@
 #include"raylib.h"
+#include"math101.h"
+
 
 const int screenwidth=800;
-const int screenheight=1200;
+const int screenheight=600;
+
+// draw point function
+void dpoint(Point a,Color c){
+  DrawPixel(a.x,a.y,c);
+}   
 
 
 int main(){
@@ -16,9 +23,15 @@ int main(){
 
     BeginDrawing();
 
-    ClearBackground(RAYWHITE);
+    ClearBackground(BLACK);
 
-    DrawText("NIce window",190,200,20,LIGHTGRAY);
+    Point a =p(200,300);
+    Point b =p(100,150);
+    Point c =p(600,400);
+
+    dpoint(a,RAYWHITE);
+    dpoint(b,RAYWHITE);
+    dpoint(c,RAYWHITE);
 
     EndDrawing();
   }
