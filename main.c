@@ -1,54 +1,58 @@
-#include"raylib.h"
-#include"math101.h"
+#include "raylib.h"
+#include "math101.h"
+#include <math.h>
 
+const int SCREEN_WIDTH = 900;
+const int SCREEN_HEIGHT = 900;
 
-const int screenwidth=800;
-const int screenheight=600;
-
-// draw point function
-void dpoint(point a,Color c){
-  DrawPixel(a.x,a.y,c);
-}   
-
+void drawPoint(point pointToDraw, Color pointColor){
+    DrawPixel(pointToDraw.x, pointToDraw.y, pointColor);
+}
 
 int main(){
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Animated Rectangle Window");
+    SetTargetFPS(60);
 
+    aabb boundingBox;
+    boundingBox.min = v2(100, 100);
+    boundingBox.max = v2(300, 250);
 
-  InitWindow(screenwidth,screenheight,"sample window");
+    float t = 0.0f;
 
-  SetTargetFPS(60);
+    while (!WindowShouldClose()) {
+        float dt = GetFrameTime();
+        t += dt;
 
+        BeginDrawing();
+        ClearBackground(BLACK);
 
-  while(!WindowShouldClose()){
+        float scaleFactor = 1.0f + sinf(t) * 0.5f;
 
-    BeginDrawing();
+        vector centerPoint = mid(boundingBox);
 
-    ClearBackground(BLACK);
+        float baseWidth = width(boundingBox);
+        float baseHeight = height(boundingBox);
 
-    point a =p(200,300);
-    point b =p(100,150);
-    point c =p(600,400);
+        float scaledWidth = baseWidth * scaleFactor;
+        float scaledHeight = baseHeight * scaleFactor;
 
-    dpoint(a,RAYWHITE);
-    dpoint(b,RAYWHITE);
-    dpoint(c,RAYWHITE);
+        float halfWidth = scaledWidth * 0.5f;
+        float halfHeight = scaledHeight * 0.5f;
 
+        point bottomLeftCorner = p(centerPoint.x - halfWidth, centerPoint.y - halfHeight);
+        point bottomRightCorner = p(centerPoint.x + halfWidth, centerPoint.y - halfHeight);
+        point topLeftCorner = p(centerPoint.x - halfWidth, centerPoint.y + halfHeight);
+        point topRightCorner = p(centerPoint.x + halfWidth, centerPoint.y + halfHeight);
 
+        DrawLine(bottomLeftCorner.x, bottomLeftCorner.y, bottomRightCorner.x, bottomRightCorner.y, WHITE);
+        DrawLine(bottomLeftCorner.x, bottomLeftCorner.y, topLeftCorner.x, topLeftCorner.y, WHITE);
+        DrawLine(topRightCorner.x, topRightCorner.y, bottomRightCorner.x, bottomRightCorner.y, WHITE);
+        DrawLine(topRightCorner.x, topRightCorner.y, topLeftCorner.x, topLeftCorner.y, WHITE);
 
-    vector offset = v2(0,20);
+        EndDrawing();
+    }
 
-    dpoint(vaddp(offset,a),RED);
-    dpoint(vaddp(offset,b),RED);
-    dpoint(vaddp(offset,c),RED);
-    
-
-    EndDrawing();
-  }
-
-
-  CloseWindow();
-    
-
-
-  return 0;
+    CloseWindow();
+    return 0;
 }
+

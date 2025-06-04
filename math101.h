@@ -31,8 +31,9 @@ vector v2(float x,float y){
 // vector addition
 vector add(vector a,vector b){vector result = {a.x+b.x,a.y+b.y};return result;}
 // vector subtraction
-vector sub(point a,point b){vector result ={a.x-b.x,a.y-b.y}; return result;}
+vector sub(vector a,vector b){vector result ={a.x-b.x,a.y-b.y}; return result;}
 // Vector+Point =Point translated int the direction of the vector 
+
 point vaddp(vector v,point p){ point result ={v.x+p.x,v.y+p.y} ;  return result;}
 vector smulv(vector v,float a){vector result = {v.x*a,v.y*a};return result;}
 
